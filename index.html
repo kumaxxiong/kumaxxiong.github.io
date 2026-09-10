@@ -1,347 +1,106 @@
+---
+---
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Kuma Xiaoyu Xiong | PhD Student</title>
-
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ site.data.site.name | escape }}</title>
+  <meta name="description"
+        content="{{ site.data.site.intro | escape }}">
+  <link rel="stylesheet"
+        href="{{ '/css/style.css' | relative_url }}">
+  <style>
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 20px;
+      margin-bottom: 40px;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 180px;
+      gap: 36px;
+      align-items: start;
+    }
+    .portrait {
+      width: 180px;
+      max-width: 100%;
+      border-radius: 12px;
+    }
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    section { scroll-margin-top: 24px; }
+    p { overflow-wrap: anywhere; }
+    @media (max-width: 600px) {
+      .hero { grid-template-columns: 1fr; }
+      h1 { font-size: 32px; }
+    }
+  </style>
 </head>
-
-
 <body>
+  {% assign profile = site.data.site %}
 
-
-<!-- Navigation -->
-
-<nav>
-
-    <div class="nav-name">
-        Kuma Xiaoyu Xiong
-    </div>
-
-
-    <div class="nav-links">
-
-        <a href="index.html">Home</a>
-
-        <a href="research.html">
-            Research
+  <nav aria-label="Main navigation">
+    <a href="#home">{{ profile.name | escape }}</a>
+    {% for section in profile.sections %}
+      {% assign body = section.body | strip %}
+      {% if body != "" and body != nil %}
+        <a href="#section-{{ forloop.index }}">
+          {{ section.title | escape }}
         </a>
+      {% endif %}
+    {% endfor %}
+    <a href="#contact">{{ profile.contact_title | escape }}</a>
+  </nav>
 
-        <a href="publications.html">
-            Publications
+  <main>
+    <section id="home" class="hero">
+      <div>
+        <h1>{{ profile.name | escape }}</h1>
+        <p><strong>{{ profile.position | escape }}</strong></p>
+        <p>{{ profile.affiliation | escape }}</p>
+        <p>{{ profile.intro | escape | newline_to_br }}</p>
+      </div>
+      {% if profile.photo and profile.photo != "" %}
+        <img class="portrait"
+             src="{{ profile.photo | relative_url | escape }}"
+             alt="{{ profile.name | escape }}">
+      {% endif %}
+    </section>
+
+    {% for section in profile.sections %}
+      {% assign body = section.body | strip %}
+      {% if body != "" and body != nil %}
+        <section id="section-{{ forloop.index }}">
+          <h2>{{ section.title | escape }}</h2>
+          <p>{{ section.body | escape | newline_to_br }}</p>
+        </section>
+      {% endif %}
+    {% endfor %}
+
+    <section id="contact">
+      <h2>{{ profile.contact_title | escape }}</h2>
+      <p>
+        <a href="mailto:{{ profile.email | escape }}">
+          {{ profile.email | escape }}
         </a>
-
-        <a href="projects.html">
-            Projects
-        </a>
-
-        <a href="cv.html">
-            CV
-        </a>
-
-        <a href="contact.html">
-            Contact
-        </a>
-
-    </div>
-
-</nav>
-
-
-
-<!-- Hero Section -->
-
-
-<section class="hero">
-
-
-    <div class="hero-text">
-
-
-        <h1>
-            Kuma Xiaoyu Xiong
-        </h1>
-
-
-        <h2>
-            PhD Student
-        </h2>
-
-
-        <p class="affiliation">
-
-            School of Creative Media<br>
-            City University of Hong Kong
-
-        </p>
-
-
-
-        <p class="intro">
-
-            My research explores digital intimacy,
-            affective experiences, and player cultures
-            in contemporary video games, with a focus on
-            otome games, online gaming communities,
-            and gacha-based mobile games.
-
-        </p>
-
-
-
-        <div class="links">
-
-
-            <a href="https://scholar.google.com/citations?hl=zh-CN&user=H9t1ijgAAAAJ"
-               target="_blank">
-
-                Google Scholar
-
-            </a>
-
-
-
-            <a href="https://orcid.org/0009-0006-3400-6576"
-               target="_blank">
-
-                ORCID
-
-            </a>
-
-
-
-            <a href="https://www.linkedin.com/in/kuma-xiaoyu-xiong-88aaa239a/"
-               target="_blank">
-
-                LinkedIn
-
-            </a>
-
-
-            <a href="files/Kuma_Xiaoyu_Xiong_CV.pdf">
-
-                CV
-
-            </a>
-
-
-        </div>
-
-
-    </div>
-
-
-
-    <!-- Profile photo placeholder -->
-
-    <div class="profile">
-
-        <img src="assets/profile.JPG"
-             alt="Kuma Xiaoyu Xiong">
-
-    </div>
-
-
-</section>
-
-
-
-
-
-<!-- About Section -->
-
-
-<section class="content">
-
-
-<h2>
-About Me
-</h2>
-
-
-<p>
-
-I am a PhD student at the School of Creative Media,
-City University of Hong Kong.
-
-My research lies at the intersection of
-game studies, digital media, and feminist media studies.
-I examine how digital games create emotional,
-affective, and intimate experiences for players.
-
-</p>
-
-
-
-<p>
-
-Before starting my PhD, I completed my
-Master of Arts in Global Communication at
-The Chinese University of Hong Kong and my
-Bachelor of Arts in Japanese Studies at
-Renmin University of China.
-
-</p>
-
-
-</section>
-
-
-
-
-
-
-
-<!-- Research Section -->
-
-
-<section class="content">
-
-
-<h2>
-Research Interests
-</h2>
-
-
-
-<div class="research-item">
-
-
-<h3>
-Virtual Intimacy and Romance in Video Games
-</h3>
-
-
-<p>
-
-Exploring how otome games and interactive narratives
-construct virtual romantic relationships and emotional
-connections between players and fictional characters.
-
-</p>
-
-
-</div>
-
-
-
-
-<div class="research-item">
-
-
-<h3>
-Player Affect and Gaming Communities
-</h3>
-
-
-<p>
-
-Investigating affective experiences, online gaming
-communities, fan cultures, and collective identities
-formed through digital games.
-
-</p>
-
-
-</div>
-
-
-
-
-<div class="research-item">
-
-
-<h3>
-Gacha Mechanics and Game Monetization
-</h3>
-
-
-<p>
-
-Examining loot boxes, probability disclosure,
-gacha systems, and regulatory issues in Japanese
-mobile games.
-
-</p>
-
-
-</div>
-
-
-
-</section>
-
-
-
-
-
-
-
-<!-- News Section -->
-
-
-<section class="content">
-
-
-<h2>
-News
-</h2>
-
-
-<ul>
-
-
-<li>
-2026 -
-Hong Kong PhD Fellowship Scheme (HKPFS)
-2026/2027 recipient.
-</li>
-
-
-<li>
-2026 -
-Presenting research on loot box regulation and
-otome game cultures at DiGRA 2026.
-</li>
-
-
-<li>
-2025 -
-Joined School of Creative Media, City University
-of Hong Kong as a PhD student.
-</li>
-
-
-</ul>
-
-
-</section>
-
-
-
-
-
-
-
-<footer>
-
-
-<p>
-
-© Kuma Xiaoyu Xiong
-
-</p>
-
-
-</footer>
-
-
-
+      </p>
+      <div class="social-links">
+        {% for link in profile.links %}
+          <a href="{{ link.url | escape }}">
+            {{ link.label | escape }}
+          </a>
+        {% endfor %}
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© {{ profile.name | escape }}</p>
+  </footer>
 </body>
-
-
 </html>
