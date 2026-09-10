@@ -1,0 +1,35 @@
+media:
+  input: assets
+  output: /assets
+
+content:
+  - name: website
+    label: 网站内容
+    type: file
+    path: _data/site.yml
+    format: yaml
+    fields:
+      - { name: name, label: 姓名, type: string }
+      - { name: position, label: 当前身份, type: string }
+      - { name: affiliation, label: 学校与院系, type: string }
+      - { name: photo, label: 个人照片, type: image }
+      - { name: intro, label: 首页简介, type: text }
+
+      - name: sections
+        label: 内容栏目
+        type: object
+        list: true
+        fields:
+          - { name: title, label: 栏目标题, type: string }
+          - { name: body, label: 栏目正文, type: text }
+
+      - { name: contact_title, label: 联系方式标题, type: string }
+      - { name: email, label: 邮箱, type: string }
+
+      - name: links
+        label: 学术与社交链接
+        type: object
+        list: true
+        fields:
+          - { name: label, label: 显示名称, type: string }
+          - { name: url, label: 链接地址, type: string }
